@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36908.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abstracciones", "Abstracciones\Abstracciones.csproj", "{4C250FCD-34D4-4868-A7B3-B0C9E20448A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reglas", "Reflas\Reglas.csproj", "{6DC8EB7F-05C7-4E56-825A-4031BAE21DEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{DADA8960-FA40-48D9-A2B5-0BFC2CDD1249}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C250FCD-34D4-4868-A7B3-B0C9E20448A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C250FCD-34D4-4868-A7B3-B0C9E20448A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C250FCD-34D4-4868-A7B3-B0C9E20448A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C250FCD-34D4-4868-A7B3-B0C9E20448A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DC8EB7F-05C7-4E56-825A-4031BAE21DEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DC8EB7F-05C7-4E56-825A-4031BAE21DEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DC8EB7F-05C7-4E56-825A-4031BAE21DEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DC8EB7F-05C7-4E56-825A-4031BAE21DEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DADA8960-FA40-48D9-A2B5-0BFC2CDD1249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DADA8960-FA40-48D9-A2B5-0BFC2CDD1249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DADA8960-FA40-48D9-A2B5-0BFC2CDD1249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DADA8960-FA40-48D9-A2B5-0BFC2CDD1249}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F2CBF31B-303F-4B4F-8F44-A26BC3054E27}
+	EndGlobalSection
+EndGlobal
