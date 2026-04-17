@@ -1,5 +1,6 @@
 using Abstracciones.Interfaces.Reglas;
 using Abstracciones.Modelos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,7 +9,7 @@ using System.Text.Json;
 
 namespace Web.Pages.Vehiculos
 {
-
+    [Authorize]
     public class EditarModel : PageModel
     {
         private IConfiguracion _configuracion;
@@ -32,7 +33,7 @@ namespace Web.Pages.Vehiculos
             if (id == null)
                 return NotFound();
             string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "ObtenerVehiculo");
-            var cliente = new HttpClient();
+            using var cliente = ObtenerClienteConToken();
 
             var solicitud = new HttpRequestMessage(HttpMethod.Get, string.Format(endpoint, id));
             var respuesta = await cliente.SendAsync(solicitud);
@@ -68,7 +69,7 @@ namespace Web.Pages.Vehiculos
                 return Page();
 
             string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "EditarVehiculo");
-            var cliente = new HttpClient();
+            using var cliente = ObtenerClienteConToken();
 
             var respuesta = await cliente.PutAsJsonAsync<VehiculoRequest>(string.Format(endpoint, vehiculo.Id.ToString()), new VehiculoRequest { IdModelo = modeloSeleccionado, Anio = vehiculo.Anio, Color = vehiculo.Color, CorreoPropietario = vehiculo.CorreoPropietario, Placa = vehiculo.Placa, Precio = vehiculo.Precio, TelefonoPropietario = vehiculo.TelefonoPropietario });
             respuesta.EnsureSuccessStatusCode();
@@ -77,7 +78,7 @@ namespace Web.Pages.Vehiculos
         private async Task ObtenerMarcasAsync()
         {
             string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "ObtenerMarcas");
-            var cliente = new HttpClient();
+            using var cliente = ObtenerClienteConToken();
             var solicitud = new HttpRequestMessage(HttpMethod.Get, endpoint);
 
             var respuesta = await cliente.SendAsync(solicitud);
@@ -87,7 +88,7 @@ namespace Web.Pages.Vehiculos
                 var resultado = await respuesta.Content.ReadAsStringAsync();
                 var opciones = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                 var resultadoDeserializado = JsonSerializer.Deserialize<List<Marca>>(resultado, opciones);
-                marcas = resultadoDeserializado.Select(a =>
+                marcas = resultadoDeserializado!.Select(a =>
                                   new SelectListItem
                                   {
                                       Value = a.Id.ToString(),
@@ -104,7 +105,7 @@ namespace Web.Pages.Vehiculos
         private async Task<List<Modelo>> ObtenerModelosAsync(Guid marcaId)
         {
             string endpoint = _configuracion.ObtenerMetodo("ApiEndPoints", "ObtenerModelos");
-            var cliente = new HttpClient();
+            using var cliente = ObtenerClienteConToken();
             var solicitud = new HttpRequestMessage(HttpMethod.Get, string.Format(endpoint, marcaId));
 
             var respuesta = await cliente.SendAsync(solicitud);
@@ -113,9 +114,22 @@ namespace Web.Pages.Vehiculos
             {
                 var resultado = await respuesta.Content.ReadAsStringAsync();
                 var opciones = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                return JsonSerializer.Deserialize<List<Modelo>>(resultado, opciones);
+                return JsonSerializer.Deserialize<List<Modelo>>(resultado, opciones) ?? new List<Modelo>();
             }
             return new List<Modelo>();
+        }
+
+        private HttpClient ObtenerClienteConToken()
+        {
+            var tokenClaim = HttpContext.User.Claims
+                .FirstOrDefault(c => c.Type == "Token");
+            var cliente = new HttpClient();
+            if (tokenClaim != null)
+            {
+                cliente.DefaultRequestHeaders.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", tokenClaim.Value);
+            }
+            return cliente;
         }
     }
 }

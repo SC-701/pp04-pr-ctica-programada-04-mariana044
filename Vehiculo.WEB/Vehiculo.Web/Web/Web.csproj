@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
     <ProjectReference Include="..\Abstracciones\Abstracciones.csproj" />
-    <ProjectReference Include="..\Reflas\Reglas.csproj" />
+    <ProjectReference Include="..\Reglas\Reglas.csproj" />
+    <ProjectReference Include="..\..\..\Seguridad\Seguridad.MiddlewareAutorizacion\Abstracciones.BW\Autorizacion.Flujo.csproj" />
+    <ProjectReference Include="..\..\..\Seguridad\Seguridad.MiddlewareAutorizacion\Autorizacion.Abstracciones\Autorizacion.Abstracciones.csproj" />
+    <ProjectReference Include="..\..\..\Seguridad\Seguridad.MiddlewareAutorizacion\Autorizacion.DA\Autorizacion.DA.csproj" />
+    <ProjectReference Include="..\..\..\Seguridad\Seguridad.MiddlewareAutorizacion\Autorizacion.Middleware\Autorizacion.Middleware.csproj" />
   </ItemGroup>
 
 </Project>

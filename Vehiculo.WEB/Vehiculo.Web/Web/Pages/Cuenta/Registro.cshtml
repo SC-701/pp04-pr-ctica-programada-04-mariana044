@@ -1,0 +1,41 @@
+@page
+@model Web.Pages.Cuenta.RegistroModel
+@{
+    ViewData["Title"] = "Registro";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-2">
+                <label asp-for="usuario.NombreUsuario" class="form-label"></label>
+                <input asp-for="usuario.NombreUsuario" class="form-control" />
+                <span asp-validation-for="usuario.NombreUsuario" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label asp-for="usuario.CorreoElectronico" class="form-label"></label>
+                <input asp-for="usuario.CorreoElectronico" class="form-control" />
+                <span asp-validation-for="usuario.CorreoElectronico" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label asp-for="usuario.Password" class="form-label"></label>
+                <input asp-for="usuario.Password" type="password" class="form-control" />
+                <span asp-validation-for="usuario.Password" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="usuario.ConfirmarPassword" class="form-label"></label>
+                <input asp-for="usuario.ConfirmarPassword" type="password" class="form-control" />
+                <span asp-validation-for="usuario.ConfirmarPassword" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+        </form>
+    </div>
+</div>
